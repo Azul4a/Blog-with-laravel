@@ -1,0 +1,17 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+//Css
+@import '../plugins/summernote/summernote-bs4.min.css';
+@import '../css/app.css';
+@import '../dist/css/adminlte.css';
+@import '../plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+@import '../plugins/fontawesome-free/css/all.min.css';
+
