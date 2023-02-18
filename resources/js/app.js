@@ -11,4 +11,6 @@ import '../plugins/chart.js/Chart.min.js'
 import '../dist/js/demo.js'
 import '../dist/js/pages/dashboard2.js'
 import '../plugins/summernote/summernote-bs4.min.js'
+import '../plugins/bs-custom-file-input/bs-custom-file-input.min.js'
+import '../plugins/select2/js/select2.full.min.js'
 

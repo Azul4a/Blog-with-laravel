@@ -21,44 +21,52 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <form action="{{ route('admin.post.store') }}" method="POST">
+                    <div class="col-12 w-75">
+                        <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 <label for="title" class="col-sm-2 col-form-label">Title</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}">
-                                    @error('title')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                <input type="text" name="title" class="form-control" id="title"
+                                       value="{{ old('title') }}">
+                                @error('title')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="row mb-3">
                                 <label for="content" class="col-sm-2 col-form-label">Content</label>
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <textarea name="content" id="summernote">{{ old('content') }}</textarea>
-                                        @error('content')
-                                        <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
+                                <textarea name="content" id="summernote">{{ old('content') }}</textarea>
+                                @error('content')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="image" class="col-sm-2 col-form-label">Image</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="image" class="form-control" id="image" value="{{ old('image') }}">
+                            <div class="form-group">
+                                <label for="thumbnail">Image</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="thumbnail" class="custom-file-input"
+                                               value="{{ old('thumbnail') }}">
+                                        <label class="custom-file-label">Choose image</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
                                 </div>
+                                @error('thumbnail')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col">
-                                    <input type="number" name="likes" class="form-control" id="likes" placeholder="Likes"
+                                    <label>Likes</label>
+                                    <input type="number" name="likes" class="form-control" id="likes"
+                                           placeholder="Likes"
                                            value="{{ old('likes') }}">
                                 </div>
                                 <div class="col">
+                                    <label>Category</label>
                                     <select name="category_id" class="form-select" aria-label="Default select example">
                                         @foreach ($categories as $category)
                                             <option
@@ -67,16 +75,20 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col">
-                                    <select name="tags[]" multiple class="form-select" aria-label="Default select example">
-                                        @foreach ($tags as $tag)
-                                            <option
-                                                {{ collect(old('tags'))->contains($tag->id) ? 'selected' : '' }}
-                                                value="{{ $tag->id }}">{{ $tag->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
+                            <div class="row mb-3">
+                                <label>Tags</label>
+                                <select name="tags[]" class="select2 form-select" multiple="multiple"
+                                        data-placeholder="Select tags"
+                                        style="width: 100%;">
+                                    @foreach ($tags as $tag)
+                                        <option
+                                            {{ collect(old('tags'))->contains($tag->id) ? 'selected' : '' }}
+                                            value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
 
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>

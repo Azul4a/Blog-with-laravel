@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Services\Post\Service;
+use Storage;
 
 class PostController extends Controller
 {
@@ -39,6 +40,7 @@ class PostController extends Controller
 
     public function update(UpdateRequest $request, Post $post) {
         $data = $request->validated();
+        $data['thumbnail'] = Storage::disk('public')->put('/images', $data['thumbnail']);
         $this->service->update($post, $data);
 
         return redirect()->route('admin.post.index', $post->id);
@@ -46,6 +48,7 @@ class PostController extends Controller
 
     public function store(StoreRequest $request) {
         $data = $request->validated();
+        $data['thumbnail'] = Storage::disk('public')->put('/images', $data['thumbnail']);
         $this->service->store($data);
 
         return redirect()->route('admin.post.index');

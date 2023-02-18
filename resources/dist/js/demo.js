@@ -701,3 +701,9 @@ $(document).ready(function() {
         ]
     });
 });
+
+$(function () {
+    bsCustomFileInput.init();
+
+    $('.select2').select2()
+});

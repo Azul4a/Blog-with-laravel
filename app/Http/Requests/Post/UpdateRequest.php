@@ -26,10 +26,11 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'thumbnail' => 'string',
+            'thumbnail' => 'required|file',
             'likes' => 'integer',
-            'category_id' => '',
-            'tags' => ''
+            'category_id' => 'required|integer|exists:categories,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'nullable|integer|exists:tags,id'
         ];
     }
 }
